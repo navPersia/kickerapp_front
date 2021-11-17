@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1>Competitie wijzigen</h1>
+  <form (ngSubmit)="editCompetition()">
+    <div class="form-group mt-4">
+      <label for="competitionName">Naam</label>
+      <input type="text" class="form-control" id="competitionName" aria-describedby="competitionNameHelp"
+        placeholder="e.g. Kicker Championship 1998" name="competitionName" [(ngModel)]="competition.name">
+      <small id="competitionNameHelp" class="form-text text-muted">De naam van de competitie.</small>
+    </div>
+    <div class="form-group">
+      <label for="gameType">Wedstrijd Type</label>
+      <select class="form-control" id="gameType" aria-describedby="gameTypeHelp" name="gameType"
+        [(ngModel)]="competition.gameTypeID">
+        <option hidden [value]="null">Selecteer wedstrijdtype</option>
+        <option *ngFor="let gameType of gameTypes" [value]="gameType.gameTypeID">{{ gameType.name }}</option>
+      </select>
+      <small id="gameTypeHelp" class="form-text text-muted">Het type van wedstrijden binnen de competitie.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="winner">Winnaar</label>
+      <select class="form-control" id="winner" aria-describedby="winnerHelp" name="winner"
+        [(ngModel)]="competition.winnerID">
+        <option hidden [value]="null">Selecteer winnaar</option>
+        <option [value]="null">Nog geen winnaar</option>
+        <option *ngFor="let group of groups" [value]="group.groupID">{{ group.name }}</option>
+      </select>
+      <small id="winnerHelp" class="form-text text-muted">De winnaar van de competitie.</small>
+    </div>
+
+    <button class="btn btn-success mr-2" type="submit">Toevoegen</button>
+    <button class="btn btn-info" routerLink="/admin/competition" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Annuleren</button>
+  </form>
+</div>

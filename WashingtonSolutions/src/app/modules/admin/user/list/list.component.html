@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="card item" style="width: 80vw">
+        <div class="card-body">
+            <h2>Gebruikers</h2>
+            <a routerLink="/admin/user/add" class="btn btn-sm btn-success mb-2">Gebruiker toevoegen</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th style="width: 12%">Voornaam</th>
+                        <th style="width: 12%">Achternaam</th>
+                        <th style="width: 12%">Username</th>
+                        <th style="width: 12%">Email</th>
+                        <th style="width: 12%">Geboortedatum</th>
+                        <th style="width: 12%">Rol</th>
+                        <th style="width: 12%">Ploeg</th>
+                        <th style="width: 12%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.dob | date}}</td>
+                        <td>{{roles[user.roleID - 1].name}}</td>
+                        <td>{{groups[user.groupID - 1].name}}</td>
+                        <td style="white-space: nowrap">
+                            <a routerLink="../edit/{{user.userID}}" class="btn btn-sm btn-primary mr-1">Bewerken</a>
+                            <button (click)="deleteUser(user.userID)" class="btn btn-sm btn-danger btn-delete-user"
+                                [disabled]="user.isDeleting">
+                                <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                                <span *ngIf="!user.isDeleting">Verwijderen</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="!users">
+                        <td colspan="8" class="text-center">
+                            <span class="spinner-border spinner-border-lg align-center"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

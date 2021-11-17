@@ -1,0 +1,63 @@
+<div class="container mt-5" *ngIf="this.game">
+  <h1>Wedstrijd Details</h1>
+  <hr>
+  <div class="row" *ngIf="this.teams">
+    <p class="col-3 font-weight-bold">Ploeg A:</p>
+    <p class="col" *ngIf="this.groups">{{ groups[teams[game.teamAID - 1].groupID - 1].name }}</p>
+  </div>
+  <div class="row" *ngIf="this.teams">
+    <p class="col-3 font-weight-bold">Ploeg B:</p>
+    <p class="col" *ngIf="this.groups">{{ groups[teams[game.teamBID - 1].groupID - 1].name }}</p>
+  </div>
+  <div class="row" *ngIf="this.teams">
+    <p class="col-3 font-weight-bold">Uitdager:</p>
+    <p class="col" *ngIf="this.groups">{{ groups[game.challengedByID - 1].name}}</p>
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Score:</p>
+    <div class="col-3">
+      <div class="row" *ngIf="this.game">
+        <input type="number" [(ngModel)]="game.scoreTeamA" style="width: 100px;" class="form-control m-1">
+        -
+        <input type="number" [(ngModel)]="game.scoreTeamB" style="width: 100px;" class="form-control m-1">
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Datum:</p>
+    <p class="col">{{ game.date | date }}</p>
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Kickertafel:</p>
+    <p class="col" *ngIf="this.tables">{{ tables[game.tableID - 1].tableName }}</p>
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Wedstrijd Type:</p>
+    <p class="col" *ngIf="this.gameTypes">{{ gameTypes[game.gameTypeID - 1].name}}</p>
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Tournooi:</p>
+    <p class="col" *ngIf="this.tournaments">{{ tournaments[game.tournamentID - 1].name }}</p>
+  </div>
+  <div class="row">
+    <p class="col-3 font-weight-bold">Wedstrijd Status:</p>
+    <p class="col" *ngIf="this.status">{{ status[game.gameStatusID - 1].name}}</p>
+  </div>
+  <button class="btn btn-primary m-1" (click)="startGame()">
+  Starten
+  </button>
+  <button class="btn btn-success m-1" (click)="changeScore()">
+    Score aanpassen
+  </button>
+  <button class="btn btn-success m-1" (click)="verifyScore()">
+    Score verifiëren
+  </button>
+  <button class="btn btn-info m-1" (click)="dispute()">
+    Betwisten
+  </button>
+  <button class="btn btn-danger m-1" (click)="endGame()">
+    Beëindigen
+  </button>
+  <a (click)="goBack()" class="btn btn-link">Terug</a>
+</div>

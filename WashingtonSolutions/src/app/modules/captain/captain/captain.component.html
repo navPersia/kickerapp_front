@@ -1,0 +1,107 @@
+<div class="container">
+  <button class="btn btn-primary m-1"  (click)="gebruiksbtn()">Gebruikers Beheren</button>
+  <button class="btn btn-primary m-1"  (click)="teamsbtn()">Teams Beheren</button>
+
+  <div class="card item" style="width: 80vw" *ngIf="gebruikerView else teamsView">
+
+    <div class="card-body">
+      <h2>Gebruikers</h2>
+
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 12%">Voornaam</th>
+            <th style="width: 12%">Achternaam</th>
+            <th style="width: 12%">Username</th>
+            <th style="width: 12%">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <form [formGroup]="form" (ngSubmit)="onSubmitGebr()">
+        <div class="form-group col">
+          <label for="noGroupUsers">Users</label>
+          <select name="noGroupUsers" id="noGroupUsers" formControlName="userID" class="form-control">
+            <option *ngFor="let user of noGroupUsers" value="{{user.userID}}">{{user.username}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Voeg nieuwe gebruiker toe.
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <ng-template #teamsView class="card item" style="width: 80vw">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 12%">TeamID</th>
+            <th style="width: 12%">TeamNaam</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of teams">
+            <td>{{team.teamID}}</td>
+            <td>{{team.teamName}}</td>
+          </tr>
+          <tr *ngIf="!teams">
+            <td colspan="4" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+      <h2>Maak een nieuw Team</h2>
+
+      <form [formGroup]="formteams" (ngSubmit)="onSubmitTeam()">
+        <div class="form-group">
+          <label for="teamName">TeamNaam</label>
+          <input type="text" formControlName="teamName" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+          <label for="noGroupUsers">Gebruiker 1 (verplicht)</label>
+          <select name="noGroupUsers" id="noGroupUsers" formControlName="userIDA" class="form-control">
+            <option *ngFor="let user of users" value="{{user.userID}}">{{user.username}}</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label for="noGroupUsers">Gebruiker 2 (optitioneel)</label>
+          <select name="noGroupUsers" id="noGroupUsers" formControlName="userIDB" class="form-control">
+            <option *ngFor="let user of users" value="{{user.userID}}">{{user.username}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Maak Nieuw team aan
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</div>

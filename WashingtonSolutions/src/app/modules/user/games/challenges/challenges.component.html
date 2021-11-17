@@ -1,0 +1,43 @@
+    <div class="container mt-5">
+      <h1>Challenges</h1>
+
+      <h3>Inkomende Challenges</h3>
+
+
+      <div *ngFor="let game of games">
+        <div class="card item" style="width: 50vw;"
+          *ngIf="game.challengedGroupID != groupID && game.gameStatusID === 2">
+          <div>
+            <p>GameID: {{game.gameID}}</p>
+            <p>{{ groups[teams[game.teamAID - 1].groupID - 1].name }}</p>
+            <p>{{ groups[teams[game.teamBID - 1].groupID - 1].name }}</p>
+            <button class="btn btn-succes" (click)="accept(game.gameID)">Accept</button>
+            <button class="btn btn-danger" (click)="reject(game.gameID)">Reject</button>
+          </div>
+        </div>
+      </div>
+      <h3>Uitgaande Challenges</h3>
+      <div *ngFor="let game of games">
+        <div class="card item" style="width: 50vw;"
+          *ngIf="game.challengedGroupID == groupID && game.gameStatusID === 2">
+          <div>
+            <p>GameID: {{game.gameID}}</p>
+            <p>{{ groups[teams[game.teamAID - 1].groupID - 1].name }}</p>
+            <p>{{ groups[teams[game.teamBID - 1].groupID - 1].name }}</p>
+          </div>
+        </div>
+      </div>
+      <h3>Declined Challenges</h3>
+      <div *ngFor="let game of games">
+        <div class="card item" style="width: 50vw;"
+          *ngIf="game.challengedGroupID == groupID && game.gameStatusID === 5">
+          <div>
+            <p>GameID: {{game.gameID}}</p>
+            <p>{{ groups[teams[game.teamAID - 1].groupID - 1].name }}</p>
+            <p>{{ groups[teams[game.teamBID - 1].groupID - 1].name }}</p>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn btn-sm btn-succes" routerLink="/user/challenge/new">Nieuwe uitdaging</a>
+    </div>

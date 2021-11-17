@@ -1,0 +1,33 @@
+<div class="body" *ngIf="groupItem">
+      <div *ngIf="notSucces" class="alert alert-danger">Wrong password or Internal Error try again!</div>
+      <div *ngIf="succes" class="alert alert-success">You have a Group now. WELL DONE!</div>
+
+    <div class="container portfolio">
+        <div class="bio-info">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="bio-content">
+                        <h1 class="text-center">You have already a Group</h1>
+                        <h6 class="pt-3">Group Name:      {{ groupItem.name }}</h6>
+                        <h6 class="pt-3">Group Company Name:      {{ groupItem.companyName }}</h6>
+                        <h6 class="pt-3">Group Location:      {{ groupItem.location }}</h6>
+                    </div>
+                </div>
+            </div>	
+        </div>
+    </div>
+</div>
+<div *ngIf="!groupItem">
+     <!-- fieldsets -->
+<form id="msform" #n="ngForm" (ngSubmit)="aad(n.value)">
+    <fieldset>
+    <h2 class="fs-title">Create your Group</h2>
+    <h3 class="fs-subtitle">It seems like that you dont have a group let's create one!</h3>
+    <input type="name" name="name" placeholder="Group Name" ngModel required/>
+    <input type="companyName" name="companyName" placeholder="Group company name" ngModel required/>
+    <input type="location" name="location" placeholder="Group location" ngModel required/>
+    <input type="password" name="password" placeholder="password" ngModel required/>
+    <input type="submit" name="next" class="next action-button" value="Create"/>
+  </fieldset>
+</form>
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="card item" style="width: 50vw;">
+        <img [src]="this.imageUrl" class="avatar">
+        <div class="card-body">
+            <h2 *ngIf="isAddMode">Gebruiker toevoegen</h2>
+            <h2 *ngIf="!isAddMode">Gebruiker bewerken</h2>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="firstName">Voornaam</label>
+                        <input type="text" formControlName="firstName" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstname.errors.required">Voornaam is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="lastName">Achternaam</label>
+                        <input type="text" formControlName="lastName" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastname.errors.required">Achternaam is verplicht</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="username">Username</label>
+                        <input type="text" formControlName="username" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                            <div *ngIf="f.username.errors.required">Username is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="password">
+                            Password
+                        </label>
+                        <input type="password" formControlName="password" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is verplicht</div>
+                            <div *ngIf="f.password.errors.minlength">Password minstens 1 lang</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="email">Email</label>
+                        <input type="text" formControlName="email" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="rol">Rol</label>
+                        <select name="rol" id="rol" formControlName="roleID" class="form-control">
+                            <option *ngFor="let role of roles" value="{{role.value}}">{{role.viewValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="dob">Geboortedatum</label>
+                        <input type="text" formControlName="dob" class="form-control" ngbDatepicker #d="ngbDatepicker"
+                            (click)="d.toggle()" [ngClass]="{'is-invalid': submitted && f.dob.errors }">
+                        <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                            <div *ngIf="f.dob.errors.required">Geboortedatum is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="userPictureID">Image ID</label>
+                        <input type="number" formControlName="userPictureID" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="groupID">Ploeg</label>
+                        <select name="groupID" id="groupID" formControlName="groupID" class="form-control">
+                            <option *ngFor="let group of groups" value="{{group.value}}">{{group.viewValue}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <a (click)="goBack()" class="btn btn-link">Annuleren</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

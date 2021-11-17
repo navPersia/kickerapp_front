@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="card item" style="width: 80vw;">
+    <div class="card-body">
+      <h2>Tournooien</h2>
+      <a href="/tournament/add" class="btn btn-sm btn-success mb-2">Tournooi toevoegen</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Naam</th>
+            <th>Startdatum</th>
+            <th>Einddatum</th>
+            <th>Competitie</th>
+            <th>Winnaar</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tournament of tournaments">
+            <td>{{ tournament.name }}</td>
+            <td>{{ tournament.startDate | date }}</td>
+            <td>{{ tournament.endDate | date }}</td>
+            <td>{{ competitions[tournament.competitionID - 1].name }}</td>
+            <td *ngIf="tournament.winnerID">{{ groups[tournament.winnerID - 1].name }}</td>
+            <td *ngIf="!tournament.winnerID">Winnaar nog niet bekend gemaakt!</td>
+            <td style="white-space: nowrap">
+              <button (click)="announceWinner(tournament.tournamentID)" class="btn btn-sm btn-primary mr-2">Maak winnaar
+                bekend</button>
+              <button class="btn btn-sm btn-success mr-2"
+                (click)="editTournament(tournament.tournamentID)">Wijzigen</button>
+              <button class="btn btn-sm btn-danger"
+                (click)="deleteTournament(tournament.tournamentID)">Verwijderen</button>
+            </td>
+          </tr>
+          <tr *ngIf="!tournaments">
+            <td colspan="6" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

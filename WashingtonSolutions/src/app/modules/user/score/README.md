@@ -1,0 +1,2 @@
+score aanpassen
+score valideren

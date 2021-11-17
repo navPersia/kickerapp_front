@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="card item" style="width: 80vw;">
+    <div class="card-body">
+      <h2>Wedstrijden</h2>
+      <a routerLink="/admin/game/add" class="btn btn-sm btn-success mb-2">Wedstrijd toevoegen</a>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Team A</th>
+            <th>Team B</th>
+            <th>Score</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let game of games">
+            <td>{{game.date | date}}</td>
+            <td>{{ teams[game.teamAID - 1].teamName }}</td>
+            <td>{{ teams[game.teamBID - 1].teamName }}</td>
+            <td>{{game.scoreTeamA}} - {{game.scoreTeamB}}</td>
+            <td style="white-space: nowrap">
+              <a routerLink="../edit/{{game.gameID}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+              <button (click)="deleteGame(game.gameID)" class="btn btn-sm btn-danger btn-delete-game"
+                [disabled]="game.isDeleting">
+                <span *ngIf="game.isDeleting" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="!game.isDeleting">Delete</span>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!games">
+            <td colspan="5" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

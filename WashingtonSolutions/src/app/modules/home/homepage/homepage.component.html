@@ -1,0 +1,111 @@
+<div class="container mt-5">
+  <!-- Logged in -->
+  <div *ngIf="user">
+    <!-- User -->
+    <div *ngIf="user.roleID == 3">
+      <h1>Welkom, {{ user.firstName }}</h1>
+      <hr>
+      <!-- User has group -->
+      <div *ngIf="user.groupID">
+        <div class="row">
+          <div class="col-lg mb-3">
+            <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+              (click)="redirectTo('user/games')">Mijn wedstrijden</button>
+          </div>
+          <div class="col-lg mb-3">
+            <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+              (click)="redirectTo('user/challenge')">Mijn challenges</button>
+          </div>
+          <div class="col-lg mb-3">
+            <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+              (click)="redirectTo('user/profile/edit')">Mijn profiel</button>
+          </div>
+        </div>
+      </div>
+      <!-- User had no group yet -->
+      <div *ngIf="! user.groupID">
+        <div class="row">
+          <div class="col-lg mb-3">
+            <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+              (click)="redirectTo('user/make-group')">Ploeg aanmaken</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Captain -->
+    <div *ngIf="user.roleID == 1">
+      <h1>Welkom, {{ user.firstName }}</h1>
+      <hr>
+      <div class="row">
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('user/games')">Mijn wedstrijden</button>
+        </div>
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('user/challenge')">Mijn challenges</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('user/profile/edit')">Mijn profiel</button>
+        </div>
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('captain')">Ploeg beheren</button>
+        </div>
+      </div>
+    </div>
+    <!-- Admin -->
+    <div *ngIf="user.roleID == 2">
+      <h1>Welkom, {{ user.firstName }}</h1>
+      <hr>
+      <div class="row">
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('admin/user/list')">Gebruikers beheren</button>
+        </div>
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('admin/game/list')">Wedstrijden beheren</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('table')">Tafels beheren</button>
+        </div>
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('group')">Ploegen beheren</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('admin/competition')">Competities beheren</button>
+        </div>
+        <div class="col-lg mb-3">
+          <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+            (click)="redirectTo('tournament')">Tournooien beheren</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Not logged in -->
+  <div *ngIf="! user">
+    <h1>Welkom</h1>
+    <hr>
+    <div class="row">
+      <div class="col-lg mb-3">
+        <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+          (click)="redirectTo('login')">Login</button>
+      </div>
+      <div class="col-lg mb-3">
+        <button type="button" class="btn btn-outline-dark btn-lg btn-block py-5 text-uppercase"
+          (click)="redirectTo('register')">Registeren</button>
+      </div>
+    </div>
+  </div>
+</div>

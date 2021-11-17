@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="card item" style="width: 50vw;">
+        <div class="card-body">
+            <h2 *ngIf="isAddMode">Wedstrijd toevoegen</h2>
+            <h2 *ngIf="!isAddMode">Wedstrijd bewerken</h2>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="scoreTeamA">Score Team A</label>
+                        <input type="number" formControlName="scoreTeamA" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.scoreTeamA.errors }" />
+                        <div *ngIf="submitted && f.scoreTeamA.errors" class="invalid-feedback">
+                            <div *ngIf="f.scoreTeamA.errors.required">Score Team A is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="scoreTeamB">Score Team B</label>
+                        <input type="number" formControlName="scoreTeamB" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.scoreTeamB.errors }" />
+                        <div *ngIf="submitted && f.scoreTeamB.errors" class="invalid-feedback">
+                            <div *ngIf="f.scoreTeamB.errors.required">Score Team B is verplicht</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="date">Datum</label>
+                        <input type="text" formControlName="date" class="form-control" ngbDatepicker #d="ngbDatepicker"
+                            (click)="d.toggle()" [ngClass]="{'is-invalid': submitted && f.date.errors }">
+                        <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                            <div *ngIf="f.date.errors.required">Datum is verplicht</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="tableID">Tafel</label>
+                        <select name="tableID" id="tableID" formControlName="tableID" class="form-control">
+                            <option *ngFor="let table of tables" value="{{table.value}}">{{table.viewValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="teamAID">Team A</label>
+                        <select name="teamA" id="teamA" formControlName="teamAID" class="form-control">
+                            <option *ngFor="let team of teams" value="{{team.value}}">{{team.viewValue}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="teamBID">Team B</label>
+                        <select name="teamB" id="teamB" formControlName="teamBID" class="form-control">
+                            <option *ngFor="let team of teams" value="{{team.value}}">{{team.viewValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="gameTypeID">Wedstrijd Type</label>
+                        <select name="gameTypeID" id="gameTypeID" formControlName="gameTypeID" class="form-control">
+                            <option *ngFor="let gameType of gameTypes" value="{{gameType.value}}">{{gameType.viewValue}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="tournamentID">Tournooi</label>
+                        <select name="tournamentID" id="tournamentID" formControlName="tournamentID"
+                            class="form-control">
+                            <option *ngFor="let tournament of tournaments" value="{{tournament.value}}">
+                                {{tournament.viewValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <a (click)="goBack()" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

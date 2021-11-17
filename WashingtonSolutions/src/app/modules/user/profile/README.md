@@ -1,0 +1,2 @@
+ranking bekijken
+statistieken bekijken

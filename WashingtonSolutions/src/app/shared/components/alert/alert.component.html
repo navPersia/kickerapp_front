@@ -1,0 +1,6 @@
+<div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+    <a class="close" (click)="removeAlert(alert)">&times;</a>
+    <span *ngIf="alert.type==0" [innerHTML]="alert.message"></span>
+    <span *ngIf="alert.type==1 && alert.message.error" [innerHTML]="alert.message.error.message"></span>
+    <span *ngIf="!alert.message.error" [innerHTML]="alert.message.message"></span>
+</div>

@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+    <a class="navbar-brand" style="color: #ffffff;" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">KickerAPP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        <div ngbDropdown class="nav-item" *ngIf="accountService.isUser() || accountService.isCaptain()">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownUser" ngbDropdownToggle>
+            Speler
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownUser">
+            <a class="nav-item nav-link" *ngFor="let item of navUser" [routerLink]="[item.link]" ngbDropdownItem>
+              {{item.title}}
+            </a>
+          </div>
+        </div>
+
+        <div ngbDropdown class="nav-item" *ngIf="accountService.isCaptain()">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownCaptain" ngbDropdownToggle>
+            Kapitein
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownCaptain">
+            <a class="nav-item nav-link" *ngFor="let item of navCaptain" [routerLink]="[item.link]" ngbDropdownItem>
+              {{item.title}}
+            </a>
+          </div>
+        </div>
+
+        <div ngbDropdown class="nav-item"  *ngIf="accountService.isAdmin()">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownAdmin" ngbDropdownToggle>
+            Admin
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownAdmin">
+            <a class="nav-item nav-link" *ngFor="let item of navAdmin" [routerLink]="[item.link]" ngbDropdownItem>
+              {{item.title}}
+            </a>
+          </div>
+        </div>
+
+      </ul>
+      
+      <div style="float: right; display: flex" *ngIf="!accountService.isLogedIn()">
+        <a class="nav-item nav-link" [routerLink]="['/register']">Registreren</a>
+        <a  class="nav-item nav-link text-dark" [routerLink]="['/login']">Aanmelden</a>
+      </div>
+      <div style="float: right; display: flex" *ngIf="accountService.isLogedIn()">
+        <p *ngIf="this.game" class="mr-2 nav-item nav-link">Welkom, {{user.firstName}}</p>
+        <img *ngIf="this.imageUrl" [src]="this.imageUrl" class="avatar">
+        <a href="" class="nav-item nav-link" (click)="logout()">Uitloggen</a>
+      </div>
+      
+    </div>
+  </nav>

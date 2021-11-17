@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h1>Challenge een team.</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- deze nog aan te passen -->
+    <div class="form-group col">
+      <label for="groupID">Pick own team</label>
+      <select name="teamID" id="teamID" formControlName="teamID" class="form-control" (change)="myTeamSelect($event.target.value)">
+        <option *ngFor="let team of userTeams" value="{{team.teamID}}">{{team.teamName}}</option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <label for="gameTypeID">Gametype</label>
+      <select name="gameTypeID" id="gameTypeID" formControlName="gameTypeID" class="form-control" (change)="gameTypeSelect($event.target.value)">
+        <option *ngFor="let gameType of gameTypes" value="{{gameType.gameTypeID}}">{{gameType.name}}</option>
+      </select>
+    </div>
+    <!-- deze nog aan te passen -->
+    <div class="form-group col">
+      <label for="groupID">Challenge Group</label>
+      <select name="groupID" id="groupID" formControlName="groupID" class="form-control" (change)="groupSelect($event.target.value)">
+        <option *ngFor="let group of groups" value="{{group.groupID}}">{{group.name}}</option>
+      </select>
+    </div>
+  
+    <div class="form-group col">
+      <label for="teamID">Challenge Team of that group</label>
+      <select name="teamID" id="noGroupUsers" formControlName="teamID" class="form-control" (change)="oppTeamSelect($event.target.value)">
+        <option *ngFor="let team of teamGroups" value="{{team.teamID}}">{{team.teamName}}</option>
+      </select>
+    </div>
+  
+    <div class="form-group col">
+      <label for="competitionID">Competition</label>
+      <select name="competitionID" id="competitionID" formControlName="competitionID" class="form-control" (change)="competitionSelect($event.target.value)">
+        <option *ngFor="let competition of competitions" value="{{competition.competitionID}}">{{competition.name}}</option>
+      </select>
+    </div>
+  
+    <div class="form-group col">
+      <label for="tableID">Table</label>
+      <select name="tableID" id="tableID" formControlName="tableID" class="form-control" (change)="tableSelect($event.target.value)">
+        <option *ngFor="let table of tables" value="{{table.tableID}}">{{table.tableName}}</option>
+      </select>
+    </div>
+    <!-- Dates zijn een miserie, voorlopig gewoon datum van vandaag pakken
+    <div class="form-group col">
+      <label for="date">Datum</label>
+      <input disabled type="text" formControlName="date" class="form-control" ngbDatepicker #d="ngbDatepicker"
+             (click)="d.toggle()">
+    </div>
+      -->
+  
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Challenge
+      </button>
+    </div>
+  </form>
+</div>

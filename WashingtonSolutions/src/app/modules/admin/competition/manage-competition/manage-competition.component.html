@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="card item" style="width: 80vw;">
+      <div class="card-body">
+          <h2>Competities</h2>
+          <button class="btn btn-sm btn-success mb-2" routerLink="/admin/competition/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Competitie toevoegen
+          </button>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th style="width: 20%">Naam</th>
+                      <th style="width: 20%">Type</th>
+                      <th style="width: 20%">Winnaar</th>
+                      <th style="width: 20%"></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let competition of competitions">
+                      <td>{{ competition.name }}</td>
+                      <td>{{ gameTypes[competition.gameTypeID - 1].name }}</td>
+                      <td *ngIf="! competition.winnerID">Nog geen winnaar!</td>
+                      <td *ngIf="competition.winnerID">{{ groups[competition.winnerID - 1].name }}</td>
+                      <td style="white-space: nowrap">
+                        <button class="btn btn-sm btn-success mr-2" (click)="editCompetition(competition.competitionID)">Wijzigen</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteCompetition(competition.competitionID)">Verwijderen</button>
+                      </td>
+                  </tr>
+                  <tr *ngIf="!competitions">
+                      <td colspan="4" class="text-center">
+                          <span class="spinner-border spinner-border-lg align-center"></span>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
